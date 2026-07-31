@@ -1,6 +1,6 @@
 # Plano de Execução - Classificação de Engajamento em EaD com Visão Computacional
 
-> Documento de trabalho para orientar, em **até 2 dias** de desenvolvimento assistido por IA, a construção dos notebooks que geram evidência empírica para validar (ou refutar) a hipótese da mini-qualificação, e que servem de insumo direto para:
+> Documento de trabalho para orientar a construção dos notebooks que geram evidência empírica para validar (ou refutar) a hipótese da mini-qualificação, e que servem de insumo direto para:
 > 1. o documento `mini-qualificacao/INF-009 2026.2 - Template Mini-qualificacao.docx` (máx. 5 páginas);
 > 2. uma apresentação de até 8 slides (10–15 min).
 
@@ -22,7 +22,7 @@
 | GPU | **Nenhuma GPU NVIDIA detectada** (`nvidia-smi` ausente) → pipeline deve assumir **CPU-only** como cenário padrão, com nota de escalabilidade caso o aluno rode em Colab/Kaggle (GPU gratuita) |
 | Pasta `notebooks/` | Vazia - notebooks-esqueleto criados como parte deste plano |
 
-**Implicação prática:** o desenho da PoC precisa ser *leve o suficiente para rodar em CPU em poucas horas*, o que descarta treinar do zero arquiteturas pesadas (Video Transformers, Mamba, 3D-CNN completas) em 2 dias. A estratégia (Seção 5) usa features compactas (landmarks/pose) + modelos leves, com um caminho opcional de fine-tuning leve se houver GPU disponível.
+**Implicação prática:** o desenho da PoC precisa ser *leve o suficiente para rodar em CPU em poucas horas*, o que descarta treinar do zero arquiteturas pesadas (Video Transformers, Mamba, 3D-CNN completas). A estratégia (Seção 5) usa features compactas (landmarks/pose) + modelos leves, com um caminho opcional de fine-tuning leve se houver GPU disponível.
 
 ---
 
@@ -58,7 +58,7 @@ Levantamento feito nesta sessão (arXiv como proxy de acesso rápido às mesmas 
 | 2023 | Abedi et al. - *Bag of States* ([arXiv:2301.06730](https://arxiv.org/abs/2301.06730)) | Bag-of-words de estados comportamentais/afetivos, **sem** modelar ordem temporal | **66,58%** acurácia | Mostra que modelar a ordem temporal pode não ser essencial - questiona premissa de modelos sequenciais pesados |
 | **2024** | Abedi & Khan - *Facial Landmarks + ST-GCN* ([arXiv:2403.17175](https://arxiv.org/abs/2403.17175)) | **MediaPipe FaceMesh** (landmarks, sem PII) → Spatial-Temporal Graph Conv Network + **transfer learning ordinal** | SOTA em EngageNet (+3,1%) e Online Student Engagement (+1,5%) | Leve, tempo real, **privacy-preserving**; referência arquitetural central deste plano |
 | **2024** | Malekshahi et al. - *A General Model for Detecting Learner Engagement* ([arXiv:2405.04251](https://arxiv.org/abs/2405.04251)) | Seleção leve de features + política de adaptação de rótulos | **68,57%** acurácia | Modelo leve supera SOTA da época; falta relato de macro-F1/kappa |
-| **2024** | Singh et al. - *VisioPhysioENet* ([arXiv:2409.16126](https://arxiv.org/abs/2409.16126)) | Landmarks (Dlib) + sinais fisiológicos rPPG (POS) + classificadores de ML | **63,09%** acurácia | Fusão multimodal ganha pouco (+8,6% vs. 1 modal) a um custo alto - **baixo custo-benefício** para PoC de 2 dias |
+| **2024** | Singh et al. - *VisioPhysioENet* ([arXiv:2409.16126](https://arxiv.org/abs/2409.16126)) | Landmarks (Dlib) + sinais fisiológicos rPPG (POS) + classificadores de ML | **63,09%** acurácia | Fusão multimodal ganha pouco (+8,6% vs. 1 modal) a um custo alto - **baixo custo-benefício** para PoC |
 | **2024** | Gogawale et al. - *Learner Attentiveness Analysis* ([arXiv:2412.00429](https://arxiv.org/abs/2412.00429)) | CNN multi-classe/multi-saída + índice de atenção agregado | Reporta superioridade qualitativa, sem número único direto | Pipeline fim-a-fim, mas não reporta métricas de classe minoritária |
 | **2025** | Mandia et al. - *EngageFormer* ([arXiv:2502.10813](https://arxiv.org/abs/2502.10813)) | Transformer multi-view (3 vistas) + sequence pooling | **63,9%** acurácia no DAiSEE | Bom desempenho cross-dataset, mas custo de treino de transformer do zero |
 | **2025** | Safa, Abedi & Khan - *Supervised Contrastive Ordinal Learning* ([arXiv:2505.20676](https://arxiv.org/abs/2505.20676)) | Contrastive learning supervisionado + **aumento de dados temporal** para classes ordinais desbalanceadas | Ganhos relatados sobre baselines ordinais | Ataca **exatamente** o gap de desbalanceamento + ordinalidade - referência-chave |
@@ -68,7 +68,7 @@ Levantamento feito nesta sessão (arXiv como proxy de acesso rápido às mesmas 
 | 2026 | Goyal et al. - *Zero-Shot VLM Benchmark* ([arXiv:2606.21861](https://arxiv.org/abs/2606.21861)) | CLIP, BLIP-VQA, GPT-4o, LLaVA-1.5, Qwen2.5VL em **zero-shot**, sem fine-tuning | Kappa **< 0,10** no DAiSEE; colapso de classe (85–100% das predições numa única classe) | **Evidência direta de que "prompting" de modelos de fundação não funciona** para este problema - justifica investir em fine-tuning/treino supervisionado, não em LLMs genéricos |
 | 2026 | Ainebyona et al. - *MobileNetV2 fine-tuned* ([arXiv:2601.08049](https://arxiv.org/abs/2601.08049)) | MobileNetV2 fine-tuned num sistema IoT de sala de aula | 89,5% (⚠️ tarefa/rotulagem não claramente comparável ao protocolo oficial 4-classes) | Serve de **alerta metodológico**: números muito altos sem relato de matriz de confusão/kappa são suspeitos de artefato de desbalanceamento |
 
-**Citação complementar da literatura já levantada pela proponente** (KE et al. 2025 - Mamba; WANG et al. 2025 - MediaPipe multi-feature; SAVCHENKO et al. 2022; RAHMAN et al. 2025; GOH et al. 2025 - YOLOv8) permanece válida como contexto de fronteira tecnológica, mas **arquiteturas tipo Mamba/Video-Transformer de ponta são desproporcionais ao orçamento de 2 dias em CPU** - tratadas como trabalho futuro na dissertação, não neste PoC.
+**Citação complementar da literatura já levantada pela proponente** (KE et al. 2025 - Mamba; WANG et al. 2025 - MediaPipe multi-feature; SAVCHENKO et al. 2022; RAHMAN et al. 2025; GOH et al. 2025 - YOLOv8) permanece válida como contexto de fronteira tecnológica, mas **arquiteturas tipo Mamba/Video-Transformer de ponta são desproporcionais ao baixo uso de CPU** - tratadas como trabalho futuro na dissertação, não neste PoC.
 
 ---
 
@@ -79,7 +79,7 @@ Levantamento feito nesta sessão (arXiv como proxy de acesso rápido às mesmas 
 | **Métrica única (acurácia)** domina os artigos; poucos relatam macro-F1/kappa/recall por classe | Protocolo de avaliação obrigatório reporta acurácia, **macro-F1, kappa, balanced accuracy, recall por classe e matriz de confusão** em todo experimento (Seção 6) |
 | Desbalanceamento extremo (0,68%/5,1% nas classes raras) é subtratado ou ignorado | Comparação sistemática de **class-weight, focal loss, oversampling (SMOTE sobre features tabulares) e undersampling**, com ablação explícita |
 | Poucos trabalhos exploram a **ordinalidade** do rótulo de forma simples e barata | Testar **perda ordinal (CORAL / cumulative logits)** vs. softmax padrão, comparando ganho real em kappa |
-| Modelos de ponta (SVFAP+LoRA, Mamba, Video Transformer) exigem GPU/tempo que não cabem em 2 dias | Pipeline **leve**: landmarks/pose do MediaPipe (sem PII, tempo real, CPU-friendly) + classificadores clássicos e um modelo temporal raso (BiLSTM/1D-CNN), inspirado no ST-GCN de Abedi & Khan (2024) |
+| Modelos de ponta (SVFAP+LoRA, Mamba, Video Transformer) exigem GPU/tempo que não cabem em um curto prazo para treinamento | Pipeline **leve**: landmarks/pose do MediaPipe (sem PII, tempo real, CPU-friendly) + classificadores clássicos e um modelo temporal raso (BiLSTM/1D-CNN), inspirado no ST-GCN de Abedi & Khan (2024) |
 | Fusão fisiológica (rPPG) tem custo alto para ganho baixo (+8,6% relativo, ~63% absoluto) | **Não priorizada** no PoC; citada como trabalho futuro |
 | Zero-shot com LLMs/VLMs falha (kappa<0,10) | Reforça a escolha por **fine-tuning/treino supervisionado**, não por prompting de modelos de fundação |
 | Ruído de rótulo por sujeito não é tratado na maioria dos trabalhos | Análise exploratória por sujeito (Notebook 01) reporta se há sujeitos com padrões atípicos, como checagem de robustez |
