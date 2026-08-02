@@ -1,0 +1,2 @@
+recall_desengajado,recall_engajado,auc_roc,meta_recall_atingida,meta_auc_atingida
+0.25882352941176473,0.9710238248551192,0.7305783871823036,False,True

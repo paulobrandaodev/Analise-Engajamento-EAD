@@ -19,7 +19,7 @@
 | Scripts legados | `extractFrames.py` (extrai **todos** os frames via ffmpeg - caro em disco/tempo) e `hog.py` (features HOG por frame, abordagem de 2016) - **desatualizados**, serão substituídos |
 | Ambiente Python | Python **3.14.4** default, sem nenhuma lib de ML/CV instalada. `pyenv` já tem **3.10** e **3.11** disponíveis. Recomenda-se venv em **3.11** (Mediapipe/Torch têm melhor suporte que em 3.14) |
 | ffmpeg | Instalado (Chocolatey e WinGet) |
-| GPU | **Nenhuma GPU NVIDIA detectada** (`nvidia-smi` ausente) → pipeline deve assumir **CPU-only** como cenário padrão, com nota de escalabilidade caso o aluno rode em Colab/Kaggle (GPU gratuita) |
+| GPU | ~~Nenhuma GPU NVIDIA detectada~~ **CORRIGIDO em 02/08/2026:** há **NVIDIA GeForce RTX 4060 (8 GB)**, driver 595.71, CUDA 13.2, com `nvidia-smi` em `C:\WINDOWS\system32`. O diagnóstico original estava errado. Torch deve ser instalado na build **cu124** (`--index-url https://download.pytorch.org/whl/cu124`). A extração do MediaPipe (Notebook 02) permanece CPU-bound, mas a Trilha B (Notebook 04) e o *stretch goal* de fine-tuning de CNN passam a ser viáveis localmente |
 | Pasta `notebooks/` | Vazia - notebooks-esqueleto criados como parte deste plano |
 
 **Implicação prática:** o desenho da PoC precisa ser *leve o suficiente para rodar em CPU em poucas horas*, o que descarta treinar do zero arquiteturas pesadas (Video Transformers, Mamba, 3D-CNN completas). A estratégia (Seção 5) usa features compactas (landmarks/pose) + modelos leves, com um caminho opcional de fine-tuning leve se houver GPU disponível.

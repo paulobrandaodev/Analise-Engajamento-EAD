@@ -1,0 +1,2 @@
+melhor_modelo,macro_f1,macro_f1_ic,kappa,kappa_ic,recall_desengajado,auc_roc,veredito_hipotese
+Trilha A (ML classico),0.37777247584772927,"[0.307, 0.481]",0.10976098405022207,"[0.068, 0.152]",0.25882352941176473,0.7305783871823036,PARCIALMENTE CORROBORADA

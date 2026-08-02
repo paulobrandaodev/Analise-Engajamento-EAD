@@ -2,17 +2,25 @@
 # py -3.11 -m venv .venv && .venv\Scripts\activate && pip install -r requirements.txt
 
 opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84  # fixado junto: mediapipe puxa a versao 5.x por padrao
 mediapipe==0.10.14
-numpy==1.26.4
+numpy==1.26.4  # instalar DEPOIS do mediapipe, que puxa numpy 2.x
 pandas==2.2.2
 pyarrow==16.1.0
 scikit-learn==1.5.1
 xgboost==2.1.0
 imbalanced-learn==0.12.3
+# GPU (RTX 4060, CUDA 13.2 no driver): instalar a build cu124 pelo indice do PyTorch
+#   pip install --index-url https://download.pytorch.org/whl/cu124 torch==2.4.0+cu124
+# Sem GPU, a linha abaixo instala a build de CPU.
 torch==2.4.0
-matplotlib==3.9.1
+matplotlib==3.9.1.post1  # 3.9.1 foi retirada do PyPI (sem wheel) e trava o resolvedor do pip
 seaborn==0.13.2
 tqdm==4.66.4
 shap==0.46.0
 jupyter==1.0.0
 ipykernel==6.29.5
+
+# Geracao dos entregaveis da mini-qualificacao (gerar_docx.py e gerar_pptx.py)
+python-docx==1.2.0
+python-pptx==1.0.2

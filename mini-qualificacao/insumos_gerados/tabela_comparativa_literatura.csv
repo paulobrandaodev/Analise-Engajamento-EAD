@@ -1,0 +1,13 @@
+referencia,acc,reporta_macro_f1_kappa
+"Sugihdharma & Bachtiar 2023 - SAE-CNN, so eye/gaze (DOI:10.1145/3626641.3626938)",0.9581,False
+ViBED-Net 2025 (arXiv:2510.18016),0.7343,False
+Shiri et al. 2024 - ConvNeXtLarge+Bi-GRU (DOI:10.1109/ICIET60671.2024.10542707),0.7018,False
+Malekshahi et al. 2024 (arXiv:2405.04251),0.6857,False
+"Abedi & Khan 2021 (ordinal, arXiv:2106.10882)",0.674,False
+Bag of States 2023 (arXiv:2301.06730),0.6658,False
+EngageFormer 2025 (arXiv:2502.10813),0.639,False
+Mehta et al. 2022 - 3D DenseAttNet (DOI:10.1007/s10489-022-03200-4),0.6359,False
+VisioPhysioENet 2024 (arXiv:2409.16126),0.6309,False
+Liao et al. 2021 - DFSTN (DOI:10.1007/s10489-020-02139-8),0.5884,False
+"Gupta et al. 2016 - LRCN, benchmark original DAiSEE (arXiv:1609.01885)",0.579,False
+NOSSO PoC - RandomForest (class_weight=balanced),0.5268620268620269,True

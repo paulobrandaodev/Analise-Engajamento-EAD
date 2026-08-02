@@ -1,1 +1,4 @@
+# Complete list of files and directories to ignore
+
 datasets/DAiSEE
+.venv

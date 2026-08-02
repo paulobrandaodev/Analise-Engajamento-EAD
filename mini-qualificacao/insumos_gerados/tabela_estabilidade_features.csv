@@ -1,0 +1,10 @@
+,freq_em_5_folds
+ear_mean,5
+ear_min,5
+gaze_v_std,4
+ear_std,4
+roll_std,2
+ear_max,2
+gaze_h_min,1
+gaze_h_std,1
+gaze_offset_std,1
